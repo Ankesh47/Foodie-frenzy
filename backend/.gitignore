@@ -1,0 +1,30 @@
+# Node modules (very large, should not be pushed)
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv files (contains secrets!)
+.env
+.env.local
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
+
+# Vercel output folder (if exists locally)
+.vercel/
+
+# Build artifacts (if you're using build scripts)
+dist/
+build/
