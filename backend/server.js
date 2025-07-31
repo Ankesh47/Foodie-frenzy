@@ -24,33 +24,19 @@ const __dirname = path.dirname(__filename)
 
 // middleware
 
+// More permissive CORS for development
 app.use(cors({
-    origin: (origin, callback) => {
-        const allowedOrigins = [
-            'http://localhost:5173', 
-            'http://localhost:5174',
-            'http://localhost:3000',
-            'http://localhost:3001',
-            'http://127.0.0.1:5173',
-            'http://127.0.0.1:5174',
-            'http://127.0.0.1:3000',
-            'http://127.0.0.1:3001'
-        ]
-        if(!origin || allowedOrigins.includes(origin)){
-            callback(null, true)
-        }
-        else {
-            console.log('CORS blocked origin:', origin);
-            callback(new Error("not allowed by CORS"))
-        }
-    },
+    origin: true, // Allow all origins in development
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+// Handle preflight requests
+app.options('*', cors())
 
 
 // Database

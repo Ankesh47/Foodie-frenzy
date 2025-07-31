@@ -29,19 +29,28 @@ export const createItem = async (req, res, next) => {
     }
 };
 
-// GET FUNCITON TO GET ALL ITEMS
+// GET FUNCTION TO GET ALL ITEMS
 export const getItems = async (_req, res, next) => {
     try {
+        console.log('Fetching items from database...');
         const items = await itemModel.find().sort({ createdAt: -1 });
+        console.log(`Found ${items.length} items`);
+        
         // Prefix image URLs with host for absolute path
         const host = `${_req.protocol}://${_req.get('host')}`;
         const withFullUrl = items.map(i => ({
             ...i.toObject(),
             imageUrl: i.imageUrl ? host + i.imageUrl : '',
         }));
+        
+        console.log('Sending response with items');
         res.json(withFullUrl);
     } catch (err) {
-        next(err);
+        console.error('Error in getItems:', err);
+        res.status(500).json({ 
+            message: 'Failed to fetch items',
+            error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
+        });
     }
 };
 
