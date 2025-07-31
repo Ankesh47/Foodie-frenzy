@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FaEye, FaEyeSlash, FaCheckCircle,FaArrowLeft  } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const url = 'http://localhost:4000'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
 
 const AwesomeToast = ({ message, icon }) => (
   <div className="animate-slide-in fixed bottom-6 right-6 flex items-center bg-gradient-to-br from-amber-500 to-amber-600 px-6 py-4 rounded-lg shadow-lg border-2 border-amber-300/20">
@@ -49,7 +49,7 @@ function SignUp() {
     //   console.log('🟢 SignUp handleSubmit fired', formData);
     
       try {
-        const res = await axios.post(`${url}/api/user/register`, formData);
+        const res = await axios.post(`${BACKEND_URL}/api/user/register`, formData);
         console.log('🟢 register response:', res.data);
     
         // **NEW**: check the actual `success` flag & token

@@ -7,6 +7,8 @@ import { FaStar, FaHeart, FaPlus, FaFire } from 'react-icons/fa';
 import { HiMinus, HiPlus } from 'react-icons/hi';
 import FloatingParticle from '../FloatingParticle/FloatingParticle';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 
 
 const SpecialOffer = () => {
@@ -21,7 +23,7 @@ const SpecialOffer = () => {
   // Fetch menu items
   useEffect(() => {
     axios
-      .get('http://localhost:4000/api/items')
+      .get(`${BACKEND_URL}/api/items`)
       .then(res => setItems(res.data.items ?? res.data))
       .catch(err => console.error(err));
   }, []);

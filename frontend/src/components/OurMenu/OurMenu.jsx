@@ -6,6 +6,8 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import './OurMenu.css'
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 
 const categories = ['Breakfast', 'Lunch', 'Dinner', 'Mexican', 'Italian', 'Desserts', 'Drinks'];
 
@@ -19,7 +21,7 @@ const OurMenu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/items');
+        const res = await axios.get(`${BACKEND_URL}/api/items`);
         const byCategory = res.data.reduce((acc, item) => {
           const cat = item.category || 'Uncategorized';
           acc[cat] = acc[cat] || [];

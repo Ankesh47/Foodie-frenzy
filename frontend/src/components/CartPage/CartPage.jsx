@@ -6,7 +6,7 @@ import { FaMinus, FaPlus, FaTrash, FaTimes } from 'react-icons/fa';
 
 
 // Base URL for serving uploaded images
-const API_URL = 'http://localhost:4000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, totalAmount } = useCart();
@@ -17,7 +17,7 @@ const CartPage = () => {
     if (!path) return '';
     return path.startsWith('http')
       ? path
-      : `${API_URL}/uploads/${path.replace(/^\/uploads\//, '')}`;
+      : `${BACKEND_URL}/uploads/${path.replace(/^\/uploads\//, '')}`;
   };
 
   return (

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FiTrash2, FiStar, FiHeart } from 'react-icons/fi';
 import { styles } from '../assets/dummyadmin';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 const List = () => {
 
      const [items, setItems] = useState([]);
@@ -12,7 +14,7 @@ const List = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const { data } = await axios.get('http://localhost:4000/api/items');
+        const { data } = await axios.get(`${BACKEND_URL}/api/items`);
         setItems(data);
       } catch (err) {
         console.error('Error fetching items:', err);
@@ -27,7 +29,7 @@ const List = () => {
   const handleDelete = async (itemId) => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     try {
-      await axios.delete(`http://localhost:4000/api/items/${itemId}`);
+      await axios.delete(`${BACKEND_URL}/api/items/${itemId}`);
       setItems(prev => prev.filter(item => item._id !== itemId));
       console.log('Deleted item ID:', itemId);
     } catch (err) {

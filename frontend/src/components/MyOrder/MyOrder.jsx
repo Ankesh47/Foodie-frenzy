@@ -3,6 +3,8 @@ import { FiTruck, FiCheckCircle, FiClock, FiArrowLeft, FiUser, FiMapPin, FiBox }
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ const MyOrder = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/orders', {
+        const response = await axios.get(`${BACKEND_URL}/api/orders`, {
           params: { email: user?.email },
           headers: {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`
@@ -202,7 +204,7 @@ const MyOrder = () => {
                               className="flex items-center gap-3 p-2 bg-[#3a2b2b]/50 rounded-lg"
                             >
                               <img
-                                src={`http://localhost:4000${item.item.imageUrl}`}
+                                src={`${BACKEND_URL}${item.item.imageUrl}`}
                                 alt={item.item.name}
                                 className="w-10 h-10 object-cover rounded-lg"
                               />

@@ -6,6 +6,8 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './OurHomeMenu.css'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 const categories = ['Breakfast', 'Lunch', 'Dinner', 'Mexican', 'Italian', 'Desserts', 'Drinks'];
 
 function OurHomeMenu() {
@@ -17,7 +19,7 @@ function OurHomeMenu() {
   const cartItems = rawCart.filter(ci => ci.item);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/items')
+    axios.get(`${BACKEND_URL}/api/items`)
       .then(res => {
         const grouped = res.data.reduce((acc, item) => {
           acc[item.category] = acc[item.category] || [];

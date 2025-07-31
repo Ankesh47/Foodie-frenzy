@@ -4,7 +4,7 @@ import { iconClass, inputBase } from '../../assets/dummydata';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const url = 'http://localhost:4000'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
 
 
 
@@ -35,7 +35,7 @@ const Login = ({ onLoginSuccess, onClose }) => {
       e.preventDefault();
     
       try {
-        const res = await axios.post(`${url}/api/user/login`, {
+        const res = await axios.post(`${BACKEND_URL}/api/user/login`, {
           email: formData.email,
           password: formData.password,
         });

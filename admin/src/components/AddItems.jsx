@@ -6,6 +6,8 @@ import { FaRupeeSign } from 'react-icons/fa';
 // import { styles } from '../../assets/dummyadmin';
 import { styles } from '../assets/dummyadmin';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+
 
 
 
@@ -58,7 +60,7 @@ function AddItems() {
         payload.append(key, val);
       });
       const res = await axios.post(
-        'http://localhost:4000/api/items',
+        `${BACKEND_URL}/api/items`,
         payload,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
