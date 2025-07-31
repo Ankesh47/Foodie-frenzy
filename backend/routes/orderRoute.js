@@ -16,7 +16,7 @@ orderRouter.get('/getall', getAllOrders);
 orderRouter.put('/getall/:id', updateAnyOrder);
 
 orderRouter.use(authMiddleware);
-// Order routes
+// Order routes - specific routes must come before parameterized routes
 orderRouter.post('/', createOrder);
 orderRouter.get('/', getOrders);
 orderRouter.get('/confirm', confirmPayment);
